@@ -1,0 +1,65 @@
+project:
+  name: "Physical AI & Humanoid Robotics - AI-Native Textbook"
+  description: "Bridging digital AI (LLMs, agents) with physical bodies, teaching embodied intelligence."
+  output_dir: "build"
+
+structure:
+  - type: "module"
+    id: "01-ros2"
+    title: "Module 1: ROS 2 - The Robotic Nervous System"
+    path: "src/modules/01-ros2"
+    weeks: [1, 2, 3, 4, 5]
+  - type: "module"
+    id: "02-digital-twin"
+    title: "Module 2: The Digital Twin (Gazebo + Unity)"
+    path: "src/modules/02-digital-twin"
+    weeks: [6, 7]
+  - type: "module"
+    id: "03-isaac"
+    title: "Module 3: The AI-Robot Brain (NVIDIA Isaac Platform)"
+    path: "src/modules/03-isaac"
+    weeks: [8, 9, 10]
+  - type: "module"
+    id: "04-vla"
+    title: "Module 4: Vision-Language-Action (VLA) + Conversational Robotics"
+    path: "src/modules/04-vla"
+    weeks: [13]
+  - type: "section"
+    id: "weeks-humanoid-dev"
+    title: "Weeks 11-12: Humanoid-specific Development"
+    path: "src/weeks/week-11_12"
+    weeks: [11, 12]
+  - type: "section"
+    id: "capstone"
+    title: "Capstone Project: Full Autonomous Simulated Humanoid"
+    path: "src/capstone"
+  - type: "section"
+    id: "hardware-guide"
+    title: "Hardware Guide (complete & honest)"
+    path: "src/hardware-guide"
+  - type: "section"
+    id: "frontmatter"
+    title: "Frontmatter & Preface"
+    path: "src/frontmatter"
+  - type: "section"
+    id: "appendices"
+    title: "Appendices"
+    path: "src/appendices"
+
+docusaurus:
+  config_file: "docusaurus.config.js"
+  sidebar_file: "sidebars.js"
+
+github_pages:
+  repository: "https://github.com/Muhammed-Riaz/physical-ai-humanoid-robotics-textbook"
+  branch: "gh-pages"
+
+authors:
+  - name: "Claude"
+    email: "noreply@anthropic.com"
+
+build_tools:
+  - "npm install"
+  - "npm run build"
+
+preview_command: "npm run start"

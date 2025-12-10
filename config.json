@@ -1,0 +1,28 @@
+{
+  "LOG": true,
+  "LOG_LEVEL": "info",
+  "HOST": "127.0.0.1",
+  "PORT": 3456,
+  "API_TIMEOUT_MS": 600000,
+  "Providers": [
+    {
+      "name": "qwen",
+      "api_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "api_key": "i2jwNT5BndvXKhwqI_wlMyzOuLC0QoNSfKFYI39I9e8vhSRiVDYgteyRTsnZp4nD3fvZb3faGhG8Ffc6yjVrzQ",
+      "models": [
+        "qwen-turbo"
+      ],
+      "transformer": {
+        "use": ["openai"]
+      }
+    }
+  ],
+  "Router": {
+    "default": "qwen,qwen-turbo",
+    "background": "qwen,qwen-turbo",
+    "think": "qwen,qwen-turbo",
+    "longContext": "qwen,qwen-turbo",
+    "longContextThreshold": 60000,
+    "webSearch": "qwen,qwen-turbo"
+  }
+}

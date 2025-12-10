@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir)",
+      "Bash(move docusaurus.config.js docs )",
+      "Bash(move sidebars.js docs )",
+      "Bash(move src docs)",
+      "Bash(robocopy \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\src\" \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\src\" /E)",
+      "Bash(dir \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\src\")",
+      "Bash(xcopy /E /I \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\src\\modules\" \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\src\\modules\")",
+      "Bash(robocopy \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\src\\modules\" \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\src\\modules\" /E)",
+      "Bash(npm start)",
+      "Bash(copy \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\src\\docs\\introduction.md\" \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\\introduction.md\")",
+      "Bash(.specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks)",
+      "Bash(mkdir -p \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\static\\img\")",
+      "Bash(powershell -Command \"if (Test-Path ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\src\\modules'') { Copy-Item -Path ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\src\\modules'' -Destination ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\\modules'' -Recurse -Force }\")",
+      "Bash(powershell -Command \"Copy-Item -Path ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\src\\weeks'' -Destination ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\\weeks'' -Recurse -Force\")",
+      "Bash(powershell -Command \"Copy-Item -Path ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\src\\capstone'' -Destination ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\\capstone'' -Recurse -Force\")",
+      "Bash(powershell -Command \"Copy-Item -Path ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\src\\frontmatter'' -Destination ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\\frontmatter'' -Recurse -Force\")",
+      "Bash(dir package.json)",
+      "Bash(dir \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\")",
+      "Bash(findstr package)",
+      "Bash(npx docusaurus start)",
+      "Bash(npx docusaurus start --config ./docusaurus.config.js)",
+      "Bash(npx docusaurus start --port 3001)",
+      "Bash(dir \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\" /s)",
+      "Bash(powershell -Command \"Get-ChildItem -Path ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs'' -Recurse | Where-Object {$_PSIsContainer} | ForEach-Object {Write-Output $_FullName}\")",
+      "Bash(dir \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\" /ad)",
+      "Bash(dir \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\\capstone\" /s)",
+      "Bash(del \"C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\\introduction.md\")",
+      "Bash(powershell -Command \"Remove-Item -Path ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\\introduction.md'' -Force\")",
+      "Bash(powershell -Command \"Remove-Item -Path ''C:\\Users\\DELL\\Desktop\\Physical_AI_Humanoid_Robotics\\docs\\docs\\capstone\\capstone'' -Recurse -Force\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
