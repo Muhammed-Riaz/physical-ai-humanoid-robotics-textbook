@@ -12,7 +12,7 @@ displayed_sidebar: null
 
 ## Master the Future of Intelligent Machines – From Theory to Real-World Application
 
-<div  style={{margin: '1rem 0'},{color:"white"}}>
+<div  style={{margin: '1rem 0', color:"white"}}>
 This comprehensive tutorial bridges digital AI with physical bodies, teaching embodied intelligence through simulation → edge device → real humanoid robots using ROS 2, Gazebo, NVIDIA Isaac Sim, and Vision-Language-Action (VLA) models.
 </div>
 

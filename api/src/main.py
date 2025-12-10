@@ -17,7 +17,7 @@ app = FastAPI(
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:3000,https://naimalarain13.github.io").split(","),
+    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:3000,https://Muhammed-Riaz.github.io").split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
