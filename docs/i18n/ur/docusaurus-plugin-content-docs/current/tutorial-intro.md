@@ -1,5 +1,5 @@
 ---
-title: فزیکل ای اور ہیومنوائڈ روبوٹکس کا تعارف
+title: "فزیکل ای اور ہیومنوائڈ روبوٹکس کا تعارف"
 sidebar_position: 2
 displayed_sidebar: tutorialSidebar
 ---

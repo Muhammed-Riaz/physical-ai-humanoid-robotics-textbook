@@ -1,5 +1,5 @@
 ---
-title: ماڈیول 1: روبوٹک آپریٹنگ سسٹم (ROS 2)
+title: "ماڈیول 1: روبوٹک آپریٹنگ سسٹم (ROS 2)"
 sidebar_position: 3
 displayed_sidebar: tutorialSidebar
 ---
