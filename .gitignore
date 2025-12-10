@@ -11,6 +11,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Backend API folder (not needed for frontend)
+api/
+
 # Model and cache directories
 api/cache/
 .cache/
