@@ -68,7 +68,3 @@ htmlcov/
 Thumbs.db
 *.tmp
 *.swp
-
-i18n
-i18n/*/docusaurus-plugin-content-docs/current/*.json
-!i18n/*/docusaurus-plugin-content-docs/current/strings.json
