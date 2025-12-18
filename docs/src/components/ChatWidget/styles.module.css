@@ -5,6 +5,7 @@
   right: 20px;
   z-index: 1000;
   font-family: var(--ifm-font-family-base);
+  pointer-events: none; /* Allow clicks to pass through when chat is closed */
 }
 
 /* Floating Button */
@@ -23,6 +24,7 @@
   font-size: 24px;
   transition: all 0.3s ease;
   z-index: 1001;
+  pointer-events: auto; /* Enable clicks on the button itself */
 }
 
 .floatingButton:hover {
@@ -55,11 +57,13 @@
   transform: translateY(20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
   border: 1px solid #e1e5e9;
+  pointer-events: none; /* Disable pointer events when chat is closed */
 }
 
 .chatPanel.open {
   opacity: 1;
   transform: translateY(0);
+  pointer-events: auto; /* Enable pointer events when chat is open */
 }
 
 /* Chat Header */
@@ -277,5 +281,10 @@ html[data-theme='dark'] .emptyState {
     width: calc(100vw - 40px);
     height: 50vh;
     max-height: 400px;
+  }
+
+  .chatWidgetContainer {
+    bottom: 15px;
+    right: 15px;
   }
 }
