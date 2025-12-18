@@ -16,16 +16,16 @@ const getApiUrl = (): string => {
       }
       
       // Fallback to default URL
-      return 'http://localhost:8000/api';
+      return 'https://riaz110-text-book.hf.space/api';
     } catch (error) {
       // If accessing the global object fails, use default
       console.warn('Could not access Docusaurus config, using default API URL');
-      return 'http://localhost:8000/api';
+      return 'https://riaz110-text-book.hf.space/api';
     }
   }
   
   // Fallback
-  return 'http://localhost:8000/api';
+  return 'https://riaz110-text-book.hf.space/api';
 };
 
 export const chatApi = {
