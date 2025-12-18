@@ -1,99 +1,118 @@
 <!--
 Sync Impact Report:
-Version change: 0.0.0 (initial) -> 1.0.0
+Version change: 2.0.0 -> 2.1.0
 List of modified principles:
-- Beginner-first teaching: New principle
-- Hands-on over theory: New principle
-- Real-world relevance: New principle
-- Honesty about difficulty and cost: New principle
-- Sim-to-real mindset: New principle
+- AI Reasoning Model: Updated to use Gemini 2.0-flash
 Added sections:
-- Key Standards
-- Project Requirements & Goals
+- Environment Configuration
 Removed sections:
 - None
 Templates requiring updates:
-- .specify/templates/plan-template.md: ✅ updated (Constitution Check alignment)
-- .specify/templates/spec-template.md: ✅ updated (scope/requirements alignment)
-- .specify/templates/tasks-template.md: ✅ updated (task categorization alignment)
+- .specify/templates/plan-template.md: ⚠ pending (Constitution Check alignment)
+- .specify/templates/spec-template.md: ⚠ pending (scope/requirements alignment)
+- .specify/templates/tasks-template.md: ⚠ pending (task categorization alignment)
 Follow-up TODOs: None
 -->
-# Physical AI & Humanoid Robotics – An AI-Native Textbook Constitution
+# Integrated RAG Chatbot for AI-Native Physical AI & Humanoid Robotics Textbook Constitution
 
 ## Core Principles
 
-### Beginner-first teaching
-Every concept must be explainable to someone who knows Python + basic AI but has never touched a robot. The content must be accessible and progressively introduce complex topics.
+### Spec-Driven Development First
+All work must strictly follow Spec-Kit Plus workflow: Specify → Plan → Tasks → Implement. No implementation without an approved task in /spec/tasks.md. This ensures all development is intentional, traceable, and aligned with project goals.
 
-### Hands-on over theory
-Every major topic must include at least one runnable code example or lab. Practical application and experimentation are prioritized to reinforce theoretical understanding.
+### Single Source of Truth
+Only Spec-Kit artifacts are authoritative: /spec/specify.md, /spec/plan.md, /spec/tasks.md. Prompts, chat messages, or assumptions must never override specs. This creates consistency across all development activities and prevents conflicting implementations.
 
-### Real-world relevance
-Focus on technologies actually used in 2025 humanoid robots (ROS 2 Humble/Iron, NVIDIA Isaac Sim, Jetson Orin, Unitree G1/Go2, Vision-Language-Action models). This ensures the content is current and valuable to aspiring roboticists.
+### Book-Only Intelligence
+The chatbot may ONLY answer using the textbook content. No web search, no external knowledge, no hallucinations. If the answer is not present, respond: "This is not covered in this book." This ensures accuracy and reliability of the educational content provided to students.
 
-### Honesty about difficulty and cost
-Never hide hardware requirements, costs, or the fact that this is computationally heavy. Transparency about the challenges and investments required in physical AI is crucial.
+### Deterministic & Verifiable RAG
+All answers must be traceable to retrieved chunks. Each response must reference chapter and section. Retrieval logic must be transparent and debuggable. This enables educators and students to verify the source of information and understand how answers are derived.
 
-### Sim-to-real mindset
-Always show the path from simulation → edge device → real robot. Emphasize the practical transition of algorithms and models from simulated environments to physical hardware.
+### Selected-Text Isolation
+When user provides highlighted text: ignore vector database, ignore all other book content, reason ONLY on the selected text. This rule is non-negotiable and ensures focused analysis of user-specified content without contamination from broader knowledge sources.
+
+### Engineering Rigor
+Modular, testable, async-first backend with clear separation: ingestion / retrieval / reasoning / API / UI. Production-grade error handling must be implemented throughout the system to ensure reliability and maintainability of the chatbot service.
 
 ## Key Standards
 
-All code examples MUST be tested and runnable on Ubuntu 22.04 + ROS 2 Humble or Iron.
-Mermaid diagrams MUST be used for every architecture (ROS 2 graph, VLA pipeline, URDF structure, etc.) to enhance visual understanding.
-Every module and week MUST contain:
-- Learning objectives
-- Key concepts with analogies
-- At least one hands-on lab or mini-project
-- Quiz/questions (multiple choice + open-ended)
-- Further reading / video links
-The tone of the textbook MUST be excited, encouraging, and practical (like a senior teammate teaching a junior).
-The language MUST be English with clear, simple sentences (Flesch-Kincaid grade 8–10 so beginners can follow).
-For tools and research papers, citation style MUST use inline links or (Author, Year) – no strict APA needed.
+### Backend Framework
+- Framework: FastAPI (Python)
+- AI Reasoning: Google Gemini 2.0-flash (free model)
+- Embeddings: Gemini embedding model
+- Vector Store: Qdrant Cloud (Free Tier)
+- Relational DB: Neon Serverless Postgres
+- Async-first design for scalability
+- Comprehensive logging and monitoring
+
+### Frontend Framework
+- Platform: Docusaurus + ChatKit UI
+- Responsive design for all device sizes
+- Accessible interface following WCAG guidelines
+- Offline-capable where possible
+- Real-time chat interface with message history
+- Loading states and error handling
+
+### RAG Quality Rules
+- Chunking must respect heading hierarchy to maintain context
+- Metadata must include: chapter, section, source_file for traceability
+- Similarity search must use cosine distance for consistent results
+- Max context window must be enforced to prevent token overflow
+- Relevance scoring must be implemented to rank retrieved chunks
+- Fallback responses must be available when no relevant content found
+
+### Security & Safety
+- No hallucination: Strict adherence to source material only
+- Input sanitization: All user inputs must be validated and sanitized
+- Rate limiting: Prevent abuse and ensure fair usage
+- Authentication: Secure access controls where required
+- Privacy: No personal data retention beyond session requirements
+- Content filtering: Prevent inappropriate use of the system
+
+### Data Management
+- Vector storage: Qdrant Cloud with proper indexing for fast retrieval
+- Metadata preservation: Maintain chapter/section references in all chunks
+- Backup procedures: Regular backups of vector and relational databases
+- Data retention: Clear policies for temporary data lifecycle
+- Content updates: Mechanism for refreshing textbook content in vectors
+
+### Environment Configuration
+- All API keys must be stored in .env file
+- Gemini API key must be added as GEMINI_API_KEY environment variable
+- Environment variables must be loaded securely at application startup
+- No hardcoding of API keys in source code
 
 ## Project Requirements & Goals
 
 ### Technical Requirements
-- Built with Spec-Kit Plus + Docusaurus.
-- Fully deployed and live on GitHub Pages.
-- Mobile-responsive (Spec-Kit Plus already handles this).
-- All images/diagrams generated with Mermaid or publicly usable sources.
-- Include complete hardware guide (Digital Twin Workstation + Economy Jetson Kit + Robot options) exactly as in the original course spec.
+- Backend: FastAPI with async support and comprehensive API documentation
+- RAG Pipeline: Properly configured ingestion, embedding, and retrieval pipeline
+- Vector Database: Qdrant Cloud with optimized similarity search
+- Frontend Integration: Seamless chat interface within Docusaurus documentation
+- Search Quality: High precision and recall for textbook content retrieval
+- Performance: Sub-second response times for typical queries
+- Scalability: Support for concurrent users during peak usage
+- API Integration: Google Gemini 2.0-flash integration with proper error handling
 
 ### Constraints
-- Zero plagiarism – everything MUST be originally written or properly attributed.
-- MUST strictly follow the official 4 modules and 13-week breakdown provided by Panaversity:
-  - Module 1: The Robotic Nervous System (ROS 2) - Weeks 3-5: ROS 2 Nodes, Topics, and Services; Bridging Python Agents to ROS controllers using rclpy; Understanding URDF (Unified Robot Description Format) for humanoids
-  - Module 2: The Digital Twin (Gazebo & Unity) - Weeks 6-7: Physics simulation and environment building; Simulating physics, gravity, and collisions in Gazebo; High-fidelity rendering and human-robot interaction in Unity; Simulating sensors: LiDAR, Depth Cameras, and IMUs
-  - Module 3: The AI-Robot Brain (NVIDIA Isaac™) - Weeks 8-10: NVIDIA Isaac Sim: Photorealistic simulation and synthetic data generation; Isaac ROS: Hardware-accelerated VSLAM (Visual SLAM) and navigation; Nav2: Path planning for bipedal humanoid movement
-  - Module 4: Vision-Language-Action (VLA) - Week 13: The convergence of LLMs and Robotics; Voice-to-Action: Using OpenAI Whisper for voice commands; Cognitive Planning: Using LLMs to translate natural language ("Clean the room") into a sequence of ROS 2 actions
-  - Weeks 1-2: Introduction to Physical AI: Foundations of Physical AI and embodied intelligence; From digital AI to robots that understand physical laws; Overview of humanoid robotics landscape; Sensor systems: LIDAR, cameras, IMUs, force/torque sensors
-  - Weeks 11-12: Humanoid Robot Development: Humanoid robot kinematics and dynamics; Bipedal locomotion and balance control; Manipulation and grasping with humanoid hands; Natural human-robot interaction design
-- Capstone project MUST be fully specified with step-by-step instructions: The Autonomous Humanoid - A simulated robot that receives a voice command, plans a path, navigates obstacles, identifies an object using computer vision, and manipulates it
-- MUST include "Why Physical AI Matters" preface and future-of-work context: Humanoid robots are poised to excel in our human-centered world because they share our physical form and can be trained with abundant data from interacting in human environments. This represents a significant transition from AI models confined to digital environments to embodied intelligence that operates in physical space.
-- No fictional hardware or fake benchmarks.
+- Content Scope: Limited exclusively to textbook content
+- External Dependencies: Minimal dependencies to ensure maintainability
+- Token Usage: Efficient use of Gemini API to minimize costs
+- Context Window: Strict management of token limits to avoid truncation
+- Compliance: Adherence to educational content guidelines and policies
+- API Limits: Respect free tier limitations of Gemini 2.0-flash model
 
-### Success Criteria (What the judges will check)
-- Book is live on GitHub Pages with a clean, professional URL.
-- All 4 modules + 13 weeks + capstone are complete and navigable.
-- At least 50+ pages of original, high-quality content.
-- Contains working code snippets, Mermaid diagrams, quizzes, and labs.
-- Hardware section is honest and matches the original course requirements.
-- Built 100% using Spec-Kit Plus (visible in repo structure and commit history).
-- Uses AI (Claude/Gemini) transparently in the making (mention in README is a bonus).
-- Feels like a real Panaversity textbook – beautiful, interactive, and inspiring.
-
-### Bonus Points (not required but will make you win)
-- Add embedded YouTube videos of real humanoid robots (Unitree G1, Figure 01, Boston Dynamics Atlas, Tesla Optimus).
-- Include a “Student Gallery” page (empty but ready for future submissions).
-- Add a contributor section thanking Zia, Rehan, Junaid, Wania and the Panaversity team.
-- Deploy within 7 days of hackathon start.
+### Success Criteria
+- Accuracy: High precision in retrieving and responding to textbook queries
+- Usability: Intuitive chat interface that enhances learning experience
+- Reliability: Consistent availability and performance during student use
+- Traceability: All responses clearly linked to source chapters and sections
+- Integration: Seamless incorporation into existing Docusaurus documentation
+- Documentation: Comprehensive setup and maintenance guides
 
 ## Governance
 
-The Constitution supersedes all other practices and serves as the ultimate source of truth for project principles and standards.
-Amendments to this constitution require thorough documentation of the changes, explicit approval from project stakeholders, and a clear migration plan for any affected systems or processes.
-All Pull Requests and code reviews MUST explicitly verify compliance with the principles and standards outlined in this constitution.
-Any proposed increase in complexity within the project MUST be thoroughly justified against the core principles and overall project goals.
+The Constitution supersedes all other practices and serves as the ultimate source of truth for project principles and standards. Amendments to this constitution require thorough documentation of the changes, explicit approval from project stakeholders, and a clear migration plan for any affected systems or processes. All Pull Requests and code reviews MUST explicitly verify compliance with the principles and standards outlined in this constitution. Any proposed increase in complexity within the project MUST be thoroughly justified against the core principles and overall project goals. Regular compliance reviews must be conducted to ensure ongoing adherence to constitutional principles throughout the development lifecycle.
 
-**Version**: 1.0.0 | **Ratified**: 2025-12-05 | **Last Amended**: 2025-12-05
+**Version**: 2.1.0 | **Ratified**: 2025-12-17 | **Last Amended**: 2025-12-17

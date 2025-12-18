@@ -24,6 +24,11 @@ const config = {
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
+  // Custom fields for the chatbot API
+  customFields: {
+    chatbotApiUrl: process.env.CHATBOT_API_URL || 'https://riaz110-text-book.hf.space/api',
+  },
+
  
 
 

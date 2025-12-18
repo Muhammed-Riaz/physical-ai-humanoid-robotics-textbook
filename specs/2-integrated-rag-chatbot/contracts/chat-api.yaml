@@ -1,0 +1,235 @@
+openapi: 3.0.0
+info:
+  title: Integrated RAG Chatbot API
+  description: API for the Integrated RAG Chatbot for Physical AI & Humanoid Robotics Textbook
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+
+paths:
+  /chat/full-book:
+    post:
+      summary: Ask a question about the full textbook
+      description: Submit a question to be answered using the entire textbook content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FullBookQuestion'
+      responses:
+        '200':
+          description: Successful response with answer and references
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Bad request - invalid input
+        '500':
+          description: Internal server error
+      security:
+        - apiKey: []
+
+  /chat/selected-text:
+    post:
+      summary: Ask a question about selected text
+      description: Submit a question to be answered using only the selected/highlighted text
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelectedTextQuestion'
+      responses:
+        '200':
+          description: Successful response with answer and references
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Bad request - invalid input
+        '500':
+          description: Internal server error
+      security:
+        - apiKey: []
+
+  /health:
+    get:
+      summary: Health check
+      description: Check if the service is running and healthy
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '503':
+          description: Service is unhealthy
+
+  /ingestion:
+    post:
+      summary: Ingest textbook content
+      description: Add new textbook content to the vector database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngestionRequest'
+      responses:
+        '200':
+          description: Content successfully ingested
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IngestionResponse'
+        '400':
+          description: Bad request - invalid content
+        '500':
+          description: Internal server error
+      security:
+        - apiKey: []
+
+components:
+  schemas:
+    FullBookQuestion:
+      type: object
+      required:
+        - question
+      properties:
+        question:
+          type: string
+          description: The question to be answered
+          example: "What is the difference between forward and inverse kinematics?"
+        current_page:
+          type: string
+          description: Current page/chapter context (optional)
+          example: "Chapter 3: Robotic Nervous System"
+
+    SelectedTextQuestion:
+      type: object
+      required:
+        - question
+        - selected_text
+      properties:
+        question:
+          type: string
+          description: The question about the selected text
+          example: "Can you explain this concept further?"
+        selected_text:
+          type: string
+          description: The text selected/highlighted by the user
+          example: "Forward kinematics is the process of determining the position and orientation of the end-effector based on the joint angles..."
+        current_page:
+          type: string
+          description: Current page/chapter context (optional)
+
+    ChatResponse:
+      type: object
+      required:
+        - id
+        - answer
+        - references
+        - timestamp
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this response
+          example: "resp_12345"
+        answer:
+          type: string
+          description: The answer to the question
+          example: "Forward kinematics calculates the end-effector position from joint angles, while inverse kinematics determines the joint angles needed to achieve a desired end-effector position."
+        references:
+          type: array
+          items:
+            type: string
+          description: List of chapter/section references used in the response
+          example: ["Chapter 3: Robotic Nervous System", "Section 3.2: Forward Kinematics"]
+        timestamp:
+          type: string
+          format: date-time
+          description: When the response was generated
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Confidence score of the response
+          example: 0.95
+
+    HealthResponse:
+      type: object
+      required:
+        - status
+        - timestamp
+      properties:
+        status:
+          type: string
+          enum: [healthy, unhealthy]
+          description: Health status of the service
+        timestamp:
+          type: string
+          format: date-time
+          description: When the health check was performed
+        details:
+          type: object
+          description: Additional health details
+          additionalProperties: true
+
+    IngestionRequest:
+      type: object
+      required:
+        - content
+        - metadata
+      properties:
+        content:
+          type: string
+          description: The textbook content to be ingested
+        metadata:
+          type: object
+          required:
+            - chapter
+            - section
+            - source_file
+          properties:
+            chapter:
+              type: string
+              description: Chapter identifier
+            section:
+              type: string
+              description: Section identifier
+            source_file:
+              type: string
+              description: Source file path
+            additional_metadata:
+              type: object
+              description: Additional metadata (optional)
+
+    IngestionResponse:
+      type: object
+      required:
+        - status
+        - chunks_processed
+      properties:
+        status:
+          type: string
+          enum: [success, error]
+          description: Status of the ingestion
+        chunks_processed:
+          type: integer
+          description: Number of content chunks processed
+        details:
+          type: string
+          description: Additional details about the ingestion
+
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for authentication
