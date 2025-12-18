@@ -236,7 +236,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({ initialIsOpen = false }) => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Ask about Physical AI & Humanoid Robotics..."
+            placeholder="Ask about the book..."
             rows={1}
             disabled={isLoading}
           />
